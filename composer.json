@@ -1,0 +1,33 @@
+{
+  "name": "codingfive0/certifier",
+  "description": "Biblioteca de WS para integração com o Soluti (Certificadora Digital)",
+  "keywords": [
+    "Soluti",
+    "certificado digital",
+    "digital",
+    "certifcado",
+    "certificadora",
+    "certificadora digital"
+  ],
+  "homepage": "https://www.contaagil.com",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Gabriel C. Silva",
+      "email": "gabriel.caldeira@contaagil.com",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": "^7.2",
+    "ext-json": "*",
+    "ext-curl": "*",
+    "ext-soap": "*",
+    "ext-openssl": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "codingFive0\\Certifier\\": "src"
+    }
+  }
+}
