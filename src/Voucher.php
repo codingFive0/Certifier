@@ -14,18 +14,17 @@ class Voucher
     private $requestBody;
     private $callback;
 
-    public function __construct()
+    public function __construct(string $user, string $key, string $serviceUrl)
     {
-        $this->user = "contaagil";
-        $this->key = "3778616349b2cf315806b245b35b122907d77bad82cd5bb14463fc4c405edf72";
+        $this->user = $user;
+        $this->key = $key;
         $this->nonce1 = time() . random_int(1000, 9999);
-        $this->serviceUrl = "https://gvshom.ca.inf.br/GVS/webservices/GVSServices.jws?wsdl";
+        $this->serviceUrl = $serviceUrl;
     }
 
     private function hmac()
     {
         $data = implode("", $this->data);
-        var_dump($this->data);
         $hkey = $this->nonce1 . $this->key;
         $hash_hkey = hash("sha256", $hkey);
         $hash_hkey_dados = hash("sha256", $hkey . $data);
@@ -64,23 +63,7 @@ class Voucher
             "hmac" => $this->hmac
         ];
 
-        var_dump($this);
-
-        $soap = new \SoapClient($this->serviceUrl, [
-            "trace" => 1,
-            "soap_version" => SOAP_1_2,
-            "cache_wsdl" => WSDL_CACHE_NONE,
-            "stream_context" => stream_context_create(
-                [
-                    "ssl" => [
-                        "verify_peer" => false,
-                        "verify_peer_name" => false
-                    ]
-                ])
-        ]);
-//        $this->callback = $soap->__call($this->endpoint, $this->requestBody);
-        var_dump(call_user_func_array([$soap, $this->endpoint], $this->requestBody));
-//        $this->request();
+        $this->request();
     }
 
 
@@ -103,8 +86,7 @@ class Voucher
                     ]
                 ])
         ]);
-//        $this->callback = $soap->__call($this->endpoint, $this->requestBody);
-        var_dump(call_user_func_array([$soap, $this->endpoint], $this->requestBody));
 
+        $this->callback = call_user_func_array([$soap, $this->endpoint], $this->requestBody);
     }
 }
