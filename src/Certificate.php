@@ -1,6 +1,6 @@
 <?php
 
-namespace codingFive0\soluti;
+namespace codingFive0\certifier;
 
 class Certificate
 {
