@@ -1,6 +1,6 @@
 <?php
 
-namespace codingFive0\certifier;
+namespace codingFive0\Certifier;
 
 class Emitter extends Certifyer
 {

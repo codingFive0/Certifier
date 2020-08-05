@@ -1,6 +1,6 @@
 <?php
 
-namespace codingFive0\certifier;
+namespace codingFive0\Certifier;
 
 class Voucher
 {
@@ -40,12 +40,12 @@ class Voucher
             "usuario" => $this->user,
             "nonce" => $this->nonce1,
             "codProduto" => $produto,
+            "Codvenda" => ($codVenda ?? ""),
             "negociacao" => $negociacao,
             "sequencia" => $sequencia,
-            "Codvenda" => $codVenda,
-            "restricao" => ($restricao == true ? "true" : "false"),
-            "sujestao" => $nomeCliente,
-            "cpfcnpj" => $cpfcnpj,
+            "restricao" => ($restricao == true ? "true" : ""),
+            "sujestao" => ($nomeCliente ?? ""),
+            "cpfcnpj" => ($cpfcnpj ?? ""),
         ];
 
         $this->hmac();
@@ -54,12 +54,12 @@ class Voucher
             "usuario" => $this->user,
             "nonce" => $this->nonce1,
             "codProduto" => $produto,
+            "Codvenda" => ($codVenda ?? ""),
             "Negociacao" => $negociacao,
             "sequencia" => $sequencia,
-            "Codvenda" => $codVenda,
-            "restricao" => ($restricao == true ? "true" : "false"),
-            "sujestao" => $nomeCliente,
-            "cpf-cnpj" => $cpfcnpj,
+            "restricao" => ($restricao == true ? "true" : ""),
+            "sujestao" => ($nomeCliente ?? ""),
+            "cpf-cnpj" => ($cpfcnpj ?? ""),
             "hmac" => $this->hmac
         ];
 
