@@ -32,7 +32,7 @@ class Voucher
         $this->hmac = $hmac;
     }
 
-    public function getVouncher(string $produto, string $negociacao, string $sequencia, string $cpfcnpj = null, string $nomeCliente = null, int $codVenda = null, bool $restricao = true)
+    public function getVouncher(int $produto, int $negociacao, int $sequencia, string $cpfcnpj = null, string $nomeCliente = null, int $codVenda = null, $restricao = true)
     {
         $this->endpoint = "getVoucherNegociacao";
 
@@ -40,12 +40,12 @@ class Voucher
             "usuario" => $this->user,
             "nonce" => $this->nonce1,
             "codProduto" => $produto,
-            "Codvenda" => ($codVenda ?? ""),
+            "codvenda" => ($codVenda ?? ""),
             "negociacao" => $negociacao,
             "sequencia" => $sequencia,
-            "restricao" => ($restricao == true ? "true" : ""),
             "sujestao" => ($nomeCliente ?? ""),
             "cpfcnpj" => ($cpfcnpj ?? ""),
+            "restrito" => ($restricao == true ? "true" : "false"),
         ];
 
         $this->hmac();
@@ -57,9 +57,9 @@ class Voucher
             "Codvenda" => ($codVenda ?? ""),
             "Negociacao" => $negociacao,
             "sequencia" => $sequencia,
-            "restricao" => ($restricao == true ? "true" : ""),
             "sujestao" => ($nomeCliente ?? ""),
             "cpf-cnpj" => ($cpfcnpj ?? ""),
+            "restrito" => ($restricao == true ? "true" : "false"),
             "hmac" => $this->hmac
         ];
 

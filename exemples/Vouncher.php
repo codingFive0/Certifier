@@ -15,13 +15,14 @@ $vouncher = new Voucher("contaagil", "679fbca573ca1249d604db5104390b05850de612c8
 
 
 $vouncher->getVouncher(
-    "1212121",
+    10,
     23908,
-    "15665656",
-    null,
-    null,
-    null,
-    false
+    1,
+    "03027529005",
+    "Gabriel Caldeira da Silva",
+    23908,
+    true
 );
 
 var_dump($vouncher);
+var_dump(json_decode($vouncher->getCallback()));
