@@ -2,18 +2,56 @@
 
 namespace codingFive0\Certifier;
 
+/**
+ * Class Voucher
+ * @package codingFive0\Certifier
+ */
 class Voucher
 {
+    /**
+     * @var string
+     */
     private $user;
+    /**
+     * @var string
+     */
     private $key;
+    /**
+     * @var string
+     */
     private $nonce1;
+    /**
+     * @var string
+     */
     private $serviceUrl;
+    /**
+     * @var
+     */
     private $endpoint;
+    /**
+     * @var
+     */
     private $hmac;
+    /**
+     * @var
+     */
     private $data;
+    /**
+     * @var
+     */
     private $requestBody;
+    /**
+     * @var
+     */
     private $callback;
 
+    /**
+     * Voucher constructor.
+     * @param string $user
+     * @param string $key
+     * @param string $serviceUrl
+     * @throws \Exception
+     */
     public function __construct(string $user, string $key, string $serviceUrl)
     {
         $this->user = $user;
@@ -22,6 +60,9 @@ class Voucher
         $this->serviceUrl = $serviceUrl;
     }
 
+    /**
+     *
+     */
     private function hmac()
     {
         $data = implode("", $this->data);
@@ -32,6 +73,15 @@ class Voucher
         $this->hmac = $hmac;
     }
 
+    /**
+     * @param int $produto
+     * @param int $negociacao
+     * @param int $sequencia
+     * @param string|null $cpfcnpj
+     * @param string|null $nomeCliente
+     * @param int|null $codVenda
+     * @param bool $restricao
+     */
     public function getVouncher(int $produto, int $negociacao, int $sequencia, string $cpfcnpj = null, string $nomeCliente = null, int $codVenda = null, $restricao = true)
     {
         $this->endpoint = "getVoucherNegociacao";
@@ -64,8 +114,17 @@ class Voucher
         ];
 
         $this->request();
+
+        return $this;
     }
 
+    /**
+     * @param string $voucher
+     *
+     * <b>Status Codes</b>
+     * <p><i>2</i> - Alocado e Disponivel para utilização</p>
+     * <p><i>3</i> - Voucher vencido ou utilizado</p>
+     */
     public function verifyVoucher(string $voucher)
     {
         $this->endpoint = "situacaoVoucher";
@@ -86,13 +145,20 @@ class Voucher
         ];
 
         $this->request();
+        return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function getCallback()
     {
         return $this->callback;
     }
 
+    /**
+     * @throws \SoapFault
+     */
     private function request()
     {
         $soap = new \SoapClient($this->serviceUrl, [
