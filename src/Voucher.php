@@ -66,6 +66,27 @@ class Voucher
         $this->request();
     }
 
+    public function verifyVoucher(string $voucher)
+    {
+        $this->endpoint = "situacaoVoucher";
+
+        $this->data = [
+            "usuario" => $this->user,
+            "nonce" => $this->nonce1,
+            "voucher" => $voucher
+        ];
+
+        $this->hmac();
+
+        $this->requestBody = [
+            "usuario" => $this->user,
+            "nonce" => $this->nonce1,
+            "voucher" => $voucher,
+            "hmac" => $this->hmac
+        ];
+
+        $this->request();
+    }
 
     public function getCallback()
     {

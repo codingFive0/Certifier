@@ -14,15 +14,16 @@ use codingFive0\Certifier\Voucher;
 $vouncher = new Voucher("contaagil", "679fbca573ca1249d604db5104390b05850de612c8a0e1a754726e3fb74db56e", "https://gvs.ca.inf.br/GVS/webservices/GVSServices.jws?wsdl");
 
 
-$vouncher->getVouncher(
-    10,
-    23908,
-    1,
-    "03027529005",
-    "Gabriel Caldeira da Silva",
-    23908,
-    true
-);
+//$vouncher->getVouncher(
+//    10,
+//    23908,
+//    1,
+//    "03027529005",
+//    "Gabriel Caldeira da Silva",
+//    23908,
+//    true
+//);
 
+$vouncher->verifyVoucher("13179d04bb86");
 var_dump($vouncher);
 var_dump(json_decode($vouncher->getCallback()));
