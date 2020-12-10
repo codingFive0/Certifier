@@ -74,6 +74,9 @@ class Voucher
     }
 
     /**
+     * <b>Gerador de Voucher</b>
+     * Gera um novo Voucher para o cliente conforme as infa=ormações foram passadas.
+     *
      * @param int $produto
      * @param int $negociacao
      * @param int $sequencia
@@ -128,6 +131,34 @@ class Voucher
     public function verifyVoucher(string $voucher)
     {
         $this->endpoint = "situacaoVoucher";
+
+        $this->data = [
+            "usuario" => $this->user,
+            "nonce" => $this->nonce1,
+            "voucher" => $voucher
+        ];
+
+        $this->hmac();
+
+        $this->requestBody = [
+            "usuario" => $this->user,
+            "nonce" => $this->nonce1,
+            "voucher" => $voucher,
+            "hmac" => $this->hmac
+        ];
+
+        $this->request();
+        return $this;
+    }
+
+    /**
+     * <b>Cancela o Voucher informado</b>
+     *
+     * @param string $voucher
+     */
+    public function cancelVoucher(string $voucher)
+    {
+        $this->endpoint = "cancelarvoucher";
 
         $this->data = [
             "usuario" => $this->user,
